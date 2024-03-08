@@ -1,43 +1,44 @@
-
-name: Continuous Integration
+name: Continuos Integration
 on:
-  push:
-    branches:
+ push:
+     branches:
       - main
       - jenk
-  workflow_dispatch:
-  
+   pull_request:
+     types:
+       - opened
+       - synchronize
+   workflow_dispatch:
+
 jobs:
-  my_first_job:
-    runs-on: ubuntu-latest
-    
+ my_first_job:
+      runs-on: ubuntu-latest
+
     steps:
-    
-      - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'zulu'
-    
-    - name: Show Java version
-      run: "java -version"
-   
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
+    - name: Set up Node 18
+       uses: actions/setup-node@v4
+       with:
+         node-version: 18
+     - name: Show Node version
+       run: "node-version"
+
+     - name: Checkout code
+       uses: actions/checkot@v4
+       with:
         ref: jenk
-    
-    - name: Show directory
-      run: 'pwd'
-    
-    - name: List files
-      run: 'ls -al'
-   
-    - name: Install Dependencies
-      run: 'mvn compile'
-    
-    - name: Build application
-      run: 'mvn package -DskipTests'
-    
-    - name: Test application
-      run: 'mvn test
+
+      - name: Show directory
+        run: 'pwd'
+
+      - name: List files
+        run: 'ls -al'
+
+      - name: Install Dependencies
+        run: 'mvn compile'
+
+      - name: Build application
+        run: 'mvn package -DskipTests'
+
+      - name: Test application
+        run: 'mvn test'
+
